@@ -9,8 +9,12 @@ set(PROJECT_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 add_executable(
         ${PROJECT_NAME}
-        ${PROJECT_SRC_DIR}/main.cpp
-        src/engine/Game.cpp src/engine/Game.h src/engine/GameState.h)
+        src/Main.cpp
+        src/engine/Game.cpp src/engine/Game.h
+        src/engine/GameState.h
+        src/game/Voxplorer.cpp
+        src/game/Voxplorer.h
+        src/game/state/IdleGameState.cpp src/game/state/IdleGameState.h)
 
 set(PROJECT_LIB ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
@@ -25,10 +29,10 @@ set(GLFW_INSTALL OFF CACHE INTERNAL "Generate installation target")
 
 add_subdirectory(${GLFW_DIR})
 
-target_link_libraries(${PROJECT_NAME} "glfw" ${GLFW_LIBRARIES})
 target_include_directories(${PROJECT_NAME} PRIVATE ${GLFW_DIR}/include)
+target_link_libraries(${PROJECT_NAME} glfw ${GLFW_LIBRARIES})
 
-#GLAD
+# GLAD
 set(GLAD_DIR ${PROJECT_LIB}/glad)
 add_library("glad" ${GLAD_DIR}/src/glad.c)
 
@@ -36,13 +40,13 @@ target_include_directories("glad" PRIVATE ${GLAD_DIR}/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${GLAD_DIR}/include)
 target_link_libraries(${PROJECT_NAME} "glad" ${CMAKE_DL_LIBS})
 
-#GLM
+# GLM
 set(GLM_DIR ${PROJECT_LIB}/glm)
 target_include_directories(${PROJECT_NAME} PRIVATE ${GLM_DIR})
 
-#FastNoise
+# FastNoise
 set(FAST_NOISE_DIR ${PROJECT_LIB}/FastNoise)
-add_library("fastnoise" ${FAST_NOISE_DIR}/FastNoise.h ${FAST_NOISE_DIR}/FastNoise.cpp src/game/Voxplorer.cpp src/game/Voxplorer.h)
+add_library("fastnoise" ${FAST_NOISE_DIR}/FastNoise.h ${FAST_NOISE_DIR}/FastNoise.cpp)
 
 target_include_directories("fastnoise" PRIVATE ${FAST_NOISE_DIR})
 target_include_directories(${PROJECT_NAME} PRIVATE ${FAST_NOISE_DIR})
