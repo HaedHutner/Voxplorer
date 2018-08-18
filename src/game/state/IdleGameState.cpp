@@ -2,7 +2,7 @@
 
 IdleGameState::IdleGameState() : GameState("IdleGameState") {}
 
-void IdleGameState::processInputs(const GLFWwindow &window) {
+void IdleGameState::processInputs(GLFWwindow *window) {
 
 }
 
@@ -10,6 +10,6 @@ bool IdleGameState::update() {
     return true;
 }
 
-void IdleGameState::render(const GLFWwindow &window) {
+void IdleGameState::render(GLFWwindow *window) {
 
 }

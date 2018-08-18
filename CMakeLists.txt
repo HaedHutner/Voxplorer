@@ -10,11 +10,24 @@ set(PROJECT_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 add_executable(
         ${PROJECT_NAME}
         src/Main.cpp
-        src/engine/Game.cpp src/engine/Game.h
+        src/engine/Camera.cpp
+        src/engine/Camera.h
+        src/engine/Game.cpp
+        src/engine/Game.h
         src/engine/GameState.h
         src/game/Voxplorer.cpp
         src/game/Voxplorer.h
-        src/game/state/IdleGameState.cpp src/game/state/IdleGameState.h)
+        src/game/state/IdleGameState.cpp
+        src/game/state/IdleGameState.h
+        src/game/state/GenerateSingleVoxelChunkState.cpp
+        src/game/state/GenerateSingleVoxelChunkState.h
+        src/game/world/VoxelChunk.cpp
+        src/game/world/VoxelChunk.h
+        src/game/world/Voxel.cpp
+        src/game/world/Voxel.h
+        src/game/world/VoxelGenerator.cpp
+        src/game/world/VoxelGenerator.h
+)
 
 set(PROJECT_LIB ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 

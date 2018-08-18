@@ -14,11 +14,11 @@ public:
 
     IdleGameState();
 
-    void processInputs(const GLFWwindow &window) override;
+    void processInputs(GLFWwindow *window) override;
 
     bool update() override;
 
-    void render(const GLFWwindow &window) override;
+    void render(GLFWwindow *window) override;
 
 };
 

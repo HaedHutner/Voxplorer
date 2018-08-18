@@ -61,17 +61,22 @@ public:
     }
 
     virtual void run() {
+
         while (!glfwWindowShouldClose(window)) {
+            double before = glfwGetTime();
             processInputs();
             update();
             render();
+            double after = glfwGetTime();
+
+            printf("Last frame took %dms\n", (int) ( ( after - before ) * 1000 ));
         }
 
         glfwTerminate();
     }
 
     virtual void processInputs() {
-        state->processInputs(*window);
+        state->processInputs(window);
     }
 
     virtual void update() {
@@ -81,7 +86,7 @@ public:
 
     virtual void render() {
         glClear(GL_COLOR_BUFFER_BIT);
-        state->render(*window);
+        state->render(window);
         glfwSwapBuffers(window);
     }
 };

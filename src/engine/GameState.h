@@ -21,7 +21,7 @@ public:
      * Process any inputs connected to this GLFWwindow
      * @param window
      */
-    virtual void processInputs(const GLFWwindow &window) = 0;
+    virtual void processInputs(GLFWwindow *window) = 0;
 
     /**
      * Update this game state
@@ -32,7 +32,7 @@ public:
     /**
      * Render the game state
      */
-    virtual void render(const GLFWwindow &window) = 0;
+    virtual void render(GLFWwindow *window) = 0;
 
 };
 
