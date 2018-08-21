@@ -1,7 +1,11 @@
 #include "Voxplorer.h"
-#include <memory>
+
+Voxplorer::Voxplorer() {
+    Voxplorer::name = "Voxplorer";
+    Voxplorer::background = {0.2f, 0.4f, 0.2f};
+}
 
 bool Voxplorer::init() {
-    setState(std::make_shared<GenerateSingleVoxelChunkState>());
+    setState(std::make_shared<IdleGameState>());
     return Game::init();
 }

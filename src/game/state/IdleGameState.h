@@ -5,14 +5,22 @@
 #ifndef VOXPLORER_IDLEGAMESTATE_H
 #define VOXPLORER_IDLEGAMESTATE_H
 
+#include <memory>
 
+#include <engine/Mesh.h>
 #include <engine/GameState.h>
-#include <GLFW/glfw3.h>
 
 class IdleGameState : public GameState{
+
+private:
+
+    std::unique_ptr<Mesh> mesh;
+
+    ShaderProgram program;
+
 public:
 
-    IdleGameState();
+    explicit IdleGameState();
 
     void processInputs(GLFWwindow *window) override;
 

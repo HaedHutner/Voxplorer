@@ -5,6 +5,8 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+
 #include "GameState.h"
 
 class Game {
@@ -15,7 +17,16 @@ private:
 
     std::shared_ptr<GameState> state;
 
+protected:
+
+    int width = 800, height = 600;
+    std::string name = "Default Name";
+
+    glm::vec3 background = {0.5f, 0.2f, 0.5f};
+
 public:
+
+    GLFWwindow *getWindow() const;
 
     void setState(const std::shared_ptr<GameState> &state);
 
@@ -33,9 +44,9 @@ public:
         glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
         window = glfwCreateWindow(
-                800,
-                600,
-                "OpenGL Window",
+                width,
+                height,
+                name.c_str(),
                 nullptr,
                 nullptr
         );
@@ -51,11 +62,10 @@ public:
 
         glfwSwapInterval(1);
 
-        int width, height;
         glfwGetFramebufferSize(window, &width, &height);
         glViewport(0, 0, width, height);
 
-        glClearColor(0.2f, 0.3f, 0.4f, 0.0f);
+        glClearColor(background.x, background.y, background.z, 0.0f);
 
         return true;
     }
@@ -64,9 +74,11 @@ public:
 
         while (!glfwWindowShouldClose(window)) {
             double before = glfwGetTime();
+
             processInputs();
             update();
             render();
+
             double after = glfwGetTime();
 
             printf("Last frame took %dms\n", (int) ( ( after - before ) * 1000 ));

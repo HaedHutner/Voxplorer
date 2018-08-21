@@ -7,6 +7,7 @@
 
 
 #include <memory>
+#include <functional>
 
 #include <engine/GameState.h>
 #include <game/world/VoxelChunk.h>
@@ -22,7 +23,7 @@ private:
 
 public:
 
-    GenerateSingleVoxelChunkState();
+    explicit GenerateSingleVoxelChunkState();
 
     bool update() override;
 

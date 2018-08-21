@@ -7,3 +7,7 @@ const std::shared_ptr<GameState> &Game::getState() const {
 void Game::setState(const std::shared_ptr<GameState> &state) {
     Game::state = state;
 }
+
+GLFWwindow *Game::getWindow() const {
+    return window;
+}

@@ -1,53 +1,56 @@
-#pragma once
+#ifndef VOXPLORER_SHADERPROGRAM_H
+#define VOXPLORER_SHADERPROGRAM_H
 
+#include <string>
 #include <vector>
-#include <iostream>
+#include <fstream>
+
 #include <glad\glad.h>
+
 #include <glm\glm.hpp>
 #include <glm\gtc\type_ptr.hpp>
 
 class ShaderProgram {
 private:
-	GLuint vertex_shader;
-	GLuint fragment_shader;
+    GLuint vertex_shader;
+    GLuint fragment_shader;
 
-	GLuint program_id;
+    GLuint program_id;
 
-	inline static GLuint create_shader(const std::string& source, GLenum type);
+    inline static GLuint createShader(const std::string &source, GLenum type);
 
-	ShaderProgram(const std::string& vertexSrc, const std::string& fragmentSrc);
+    ShaderProgram(const std::string &vertexSrc, const std::string &fragmentSrc);
 
 public:
 
-	ShaderProgram() {
+    static ShaderProgram fromSources(const std::string &vertexSrc, const std::string &fragmentSrc);
 
-	}
+    static ShaderProgram fromFiles(const std::string &vertexPath, const std::string &fragmentPath);
 
-	static ShaderProgram from_sources(const std::string& vertexSrc, const std::string& fragmentSrc);
+    void clear();
 
-	static ShaderProgram from_files(const std::string& vertexPath, const std::string& fragmentPath);
+    void setAttribute(const std::string &name, GLenum type, GLboolean normalized, GLint size, GLsizei stride,
+                      const void *pointer) const;
 
-	void clear();
+    void setUniformBool(const std::string &name, bool value) const;
 
-	void set_attribute		(const std::string& name, GLenum type, GLboolean normalized, GLint size, GLsizei stride, const void* pointer) const;
+    void setUniformInt(const std::string &name, int value) const;
 
-	void set_uniform_bool	(const std::string& name, bool value) const;
+    void setUniformFloat(const std::string &name, float value) const;
 
-	void set_uniform_int	(const std::string& name, int value) const;
+    void setUniformDouble(const std::string &name, double value) const;
 
-	void set_uniform_float	(const std::string& name, float value) const;
+    void setUniformMat4(const std::string &name, const glm::mat4 &matrix) const;
 
-	void set_uniform_double	(const std::string& name, double value) const;
+    void setUniformVec3(const std::string &name, const glm::vec3 &vector) const;
 
-	void set_uniform_mat4	(const std::string& name, const glm::mat4& matrix) const;
+    void setUniformVec4(const std::string &name, const glm::vec4 &vector) const;
 
-	void set_uniform_vec3	(const std::string& name, const glm::vec3& vector) const;
+    void link();
 
-	void set_uniform_vec4	(const std::string& name, const glm::vec4& vector) const;
+    void use();
 
-	void link();
-
-	void use();
-
-	GLuint id();
+    GLuint id();
 };
+
+#endif

@@ -15,6 +15,11 @@ add_executable(
         src/engine/Game.cpp
         src/engine/Game.h
         src/engine/GameState.h
+        src/engine/ShaderProgram.cpp
+        src/engine/ShaderProgram.h
+        src/engine/Mesh.cpp
+        src/engine/Mesh.h
+        src/engine/Vertex.hpp
         src/game/Voxplorer.cpp
         src/game/Voxplorer.h
         src/game/state/IdleGameState.cpp

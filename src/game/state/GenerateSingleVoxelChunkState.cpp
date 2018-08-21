@@ -20,8 +20,13 @@ GenerateSingleVoxelChunkState::GenerateSingleVoxelChunkState()
 }
 
 void GenerateSingleVoxelChunkState::processInputs(GLFWwindow *window) {
+    // Process keyboard input
     camera->process_key_input(window);
-    //printf("Camera Position: %f, %f, %f\n", camera->get_position().x, camera->get_position().y, camera->get_position().z);
+
+    // Process cursor movement input
+    double x, y;
+    glfwGetCursorPos(window, &x, &y);
+    camera->process_mouse_input(window, x, y);
 }
 
 bool GenerateSingleVoxelChunkState::update() {

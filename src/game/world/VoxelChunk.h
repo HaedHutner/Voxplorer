@@ -2,8 +2,8 @@
 // Created by Miro on 18-Aug-18.
 //
 
-#ifndef VOXPLORER_SCALARFIELD_H
-#define VOXPLORER_SCALARFIELD_H
+#ifndef VOXPLORER_VOXELCHUNK_H
+#define VOXPLORER_VOXELCHUNK_H
 
 
 #include <vector>
@@ -43,4 +43,4 @@ public:
 };
 
 
-#endif //VOXPLORER_SCALARFIELD_H
+#endif //VOXPLORER_VOXELCHUNK_H
