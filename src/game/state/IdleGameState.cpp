@@ -6,8 +6,8 @@ IdleGameState::IdleGameState()
     IdleGameState::mesh = std::unique_ptr<Mesh>(new Mesh(
             {
                     Vertex({0.5, 0.5, 0.5}),
-                    Vertex({1.0, 1.0, 1.0}),
-                    Vertex({1.5, 1.5, 1.5})
+                    Vertex({1.0, 2.0, 1.0}),
+                    Vertex({1.5, 1.5, 3.5})
             },
             {
                     1, 2, 3

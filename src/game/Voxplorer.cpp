@@ -6,6 +6,7 @@ Voxplorer::Voxplorer() {
 }
 
 bool Voxplorer::init() {
-    setState(std::make_shared<IdleGameState>());
+    Game::state = std::make_shared<IdleGameState>();
+    //setState(std::make_shared<IdleGameState>());
     return Game::init();
 }

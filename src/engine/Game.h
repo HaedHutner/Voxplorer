@@ -11,13 +11,11 @@
 
 class Game {
 
-private:
+protected:
 
     GLFWwindow *window;
 
     std::shared_ptr<GameState> state;
-
-protected:
 
     int width = 800, height = 600;
     std::string name = "Default Name";

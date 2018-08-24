@@ -7,6 +7,10 @@ project(${PROJECT_NAME})
 
 set(PROJECT_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
+# set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fsanitize-undefined-trap-on-error")
+
+add_compile_options(-fsanitize-undefined-trap-on-error)
+
 add_executable(
         ${PROJECT_NAME}
         src/Main.cpp
