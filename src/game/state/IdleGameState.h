@@ -9,11 +9,13 @@
 
 #include <engine/Mesh.h>
 #include <engine/GameState.h>
+#include <engine/Camera.h>
 
 class IdleGameState : public GameState{
 
 private:
 
+    std::unique_ptr<Camera> camera;
     std::unique_ptr<Mesh> mesh;
 
     ShaderProgram program;

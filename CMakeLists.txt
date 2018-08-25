@@ -1,15 +1,16 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(PROJECT_NAME Voxplorer)
 
 project(${PROJECT_NAME})
 
 set(PROJECT_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+set(PROJECT_SHADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/res/shader)
 
 # set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fsanitize-undefined-trap-on-error")
 
-add_compile_options(-fsanitize-undefined-trap-on-error)
+# add_compile_options(-fsanitize-undefined-trap-on-error)
 
 add_executable(
         ${PROJECT_NAME}
@@ -75,3 +76,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${FAST_NOISE_DIR})
 target_link_libraries(${PROJECT_NAME} "fastnoise" ${CMAKE_DL_LIBS})
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SRC_DIR})
+
+file(REMOVE_RECURSE ${CMAKE_CURRENT_BINARY_DIR}/res)
+file(COPY ${PROJECT_SHADER_DIR} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/res)

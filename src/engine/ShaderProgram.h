@@ -10,6 +10,8 @@
 #include <glm\glm.hpp>
 #include <glm\gtc\type_ptr.hpp>
 
+#include "Vertex.hpp"
+
 class ShaderProgram {
 private:
     GLuint vertex_shader;

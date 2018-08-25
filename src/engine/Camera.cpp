@@ -4,28 +4,28 @@ Camera::Camera(float fov, float cameraSpeed, float mouseSensitivity, int screenX
                glm::vec3 beginningCoords, glm::vec3 beginningDirection, glm::vec2 beginningRotation)
         : camera_position(beginningCoords), camera_direction(beginningDirection), camera_target(beginningRotation, 0),
           field_of_view(fov), speed_modifyer(cameraSpeed), mouse_sensitivity(mouseSensitivity) {
-    update_projection(screenX, screenY);
+    updateProjection(screenX, screenY);
 }
 
 Camera::~Camera() {
 
 }
 
-glm::mat4 Camera::get_view() {
+glm::mat4 Camera::getView() {
     return glm::lookAt(camera_position, camera_position + camera_front, camera_up);
 }
 
-glm::mat4 Camera::get_projection() {
+glm::mat4 Camera::getProjection() {
     return projection;
 }
 
-glm::vec3 Camera::get_position() { return camera_position; }
+glm::vec3 Camera::getPosition() { return camera_position; }
 
-void Camera::update_projection(int screenX, int screenY) {
+void Camera::updateProjection(int screenX, int screenY) {
     projection = glm::perspective(glm::radians(field_of_view), (double) screenX / screenY, 0.1, 1000.0);
 }
 
-void Camera::reset_cursor(float x, float y) {
+void Camera::resetCursor(float x, float y) {
     last_x = x;
     last_y = y;
 }
@@ -53,7 +53,7 @@ void Camera::move(MoveDirection dir, float speed) {
     }
 }
 
-void Camera::process_key_input(GLFWwindow *window) {
+void Camera::processKeyInput(GLFWwindow *window) {
     double currentFrame = glfwGetTime();
     delta_time = currentFrame - last_frame;
     last_frame = currentFrame;
@@ -87,7 +87,7 @@ void Camera::process_key_input(GLFWwindow *window) {
     }
 }
 
-void Camera::process_mouse_input(GLFWwindow *window, double x, double y) {
+void Camera::processMouseInput(GLFWwindow *window, double x, double y) {
     if (first_mouse) {
         last_x = x;
         last_y = y;
@@ -115,4 +115,12 @@ void Camera::process_mouse_input(GLFWwindow *window, double x, double y) {
 
     last_x = x;
     last_y = y;
+}
+
+double Camera::getYaw() const {
+    return yaw;
+}
+
+double Camera::getPitch() const {
+    return pitch;
 }

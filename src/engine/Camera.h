@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GLFW\glfw3.h>
+#include <GLFW/glfw3.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -53,19 +53,23 @@ public:
 
     ~Camera();
 
-    glm::mat4 get_view();
+    glm::mat4 getView();
 
-    glm::mat4 get_projection();
+    glm::mat4 getProjection();
 
-    glm::vec3 get_position();
+    glm::vec3 getPosition();
 
-    void update_projection(int screenX, int screenY);
+    void updateProjection(int screenX, int screenY);
 
-    void reset_cursor(float x, float y);
+    void resetCursor(float x, float y);
 
     void move(MoveDirection dir, float speed);
 
-    void process_key_input(GLFWwindow *window);
+    void processKeyInput(GLFWwindow *window);
 
-    void process_mouse_input(GLFWwindow *window, double x, double y);
+    void processMouseInput(GLFWwindow *window, double x, double y);
+
+    double getYaw() const;
+
+    double getPitch() const;
 };

@@ -21,12 +21,12 @@ GenerateSingleVoxelChunkState::GenerateSingleVoxelChunkState()
 
 void GenerateSingleVoxelChunkState::processInputs(GLFWwindow *window) {
     // Process keyboard input
-    camera->process_key_input(window);
+    camera->processKeyInput(window);
 
     // Process cursor movement input
     double x, y;
     glfwGetCursorPos(window, &x, &y);
-    camera->process_mouse_input(window, x, y);
+    camera->processMouseInput(window, x, y);
 }
 
 bool GenerateSingleVoxelChunkState::update() {

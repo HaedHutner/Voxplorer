@@ -22,6 +22,8 @@ protected:
 
     glm::vec3 background = {0.5f, 0.2f, 0.5f};
 
+    double lastTickDuration = 0.0;
+
 public:
 
     GLFWwindow *getWindow() const;
@@ -30,60 +32,11 @@ public:
 
     const std::shared_ptr<GameState> &getState() const;
 
-    virtual bool init() {
-        if (!glfwInit()) {
-            return false;
-        }
+    double getLastTickDuration() const;
 
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-        glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
+    virtual bool init();
 
-        window = glfwCreateWindow(
-                width,
-                height,
-                name.c_str(),
-                nullptr,
-                nullptr
-        );
-
-        if (!window) {
-            glfwTerminate();
-            return false;
-        }
-
-        glfwMakeContextCurrent(window);
-
-        gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
-
-        glfwSwapInterval(1);
-
-        glfwGetFramebufferSize(window, &width, &height);
-        glViewport(0, 0, width, height);
-
-        glClearColor(background.x, background.y, background.z, 0.0f);
-
-        return true;
-    }
-
-    virtual void run() {
-
-        while (!glfwWindowShouldClose(window)) {
-            double before = glfwGetTime();
-
-            processInputs();
-            update();
-            render();
-
-            double after = glfwGetTime();
-
-            printf("Last frame took %dms\n", (int) ( ( after - before ) * 1000 ));
-        }
-
-        glfwTerminate();
-    }
+    virtual void run();
 
     virtual void processInputs() {
         state->processInputs(window);
