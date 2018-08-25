@@ -30,17 +30,17 @@ public:
 
     const std::vector<Voxel> &getVoxels() const;
 
-    const Voxel getRelativeAt(glm::ivec3 &relPosition);
+    const Voxel getRelativeAt(glm::ivec3 &relPosition) const;
 
-    const Voxel getAbsoluteAt(glm::ivec3 &absPosition);
+    const Voxel getAbsoluteAt(glm::ivec3 &absPosition) const;
 
-    const Voxel getRelativeTo(const Voxel &voxel, const glm::ivec3 &offset);
+    const Voxel getRelativeTo(const Voxel &voxel, const glm::ivec3 &offset) const;
+
+    bool isWithin(glm::ivec3 &pos) const;
 
     void setRelativeAt(Voxel voxel);
 
     void setAbsoluteAt(Voxel voxel);
-
-    bool isWithin(glm::ivec3 &pos);
 
 };
 

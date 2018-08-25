@@ -15,13 +15,13 @@ static const GLuint _VERTEX_MATERIAL_LOCATION = 1;
 struct Vertex {
 
     glm::vec3 position;
-    unsigned int material;
+    GLuint material;
 
-    Vertex(float x, float y, float z, unsigned int material) :position({x, y, z}), material(material) {
+    Vertex(GLfloat x, GLfloat y, GLfloat z, GLuint material) : position({x, y, z}), material(material) {
 
     }
 
-    Vertex(const glm::vec3 &position, unsigned int material) :position(position), material(material) {
+    Vertex(const glm::vec3 &position, GLuint material) : position(position), material(material) {
 
     }
 
@@ -35,7 +35,7 @@ struct Vertex {
         glVertexAttribPointer(_VERTEX_POSITION_LOCATION, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *) 0);
 
         glEnableVertexAttribArray(_VERTEX_MATERIAL_LOCATION);
-        glVertexAttribPointer(_VERTEX_MATERIAL_LOCATION, 1, GL_UNSIGNED_INT, GL_FALSE, sizeof(Vertex), (void *) (3 * sizeof(GLfloat)));
+        glVertexAttribIPointer(_VERTEX_MATERIAL_LOCATION, 1, GL_UNSIGNED_INT, sizeof(Vertex), (void *) (3 * sizeof(GLfloat)));
     }
 
 };

@@ -13,6 +13,7 @@
 #include <engine/Camera.h>
 
 #include <game/world/VoxelChunk.h>
+#include <game/logic/MarchingCubes.h>
 
 class GenerateSingleVoxelChunkState : public GameState {
 
@@ -27,6 +28,8 @@ private:
     std::unique_ptr<Mesh> mesh;
 
     ShaderProgram program;
+
+    MarchingCubes marchingCubes;
 
 public:
 

@@ -9,7 +9,7 @@ uniform mat4 MVP;
 
 void main() {
     if ( material != 0 ) {
-        vecColor = vec4(1.0, 1.0, 1.0, 1.0);
+        vecColor = vec4(material / 255.0, material / 255.0, material / 255.0, 1.0);
         gl_Position = MVP * vec4(position, 1.0);
         gl_PointSize = 5.0;
     } else {

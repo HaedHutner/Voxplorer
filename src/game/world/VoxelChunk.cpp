@@ -30,11 +30,11 @@ const std::vector<Voxel> &VoxelChunk::getVoxels() const {
     return voxels;
 }
 
-const Voxel VoxelChunk::getRelativeAt(glm::ivec3 &relPosition) {
+const Voxel VoxelChunk::getRelativeAt(glm::ivec3 &relPosition) const {
     return voxels[relPosition.x + size.x * ( relPosition.y + size.y * relPosition.z )];
 }
 
-const Voxel VoxelChunk::getAbsoluteAt(glm::ivec3 &absPosition) {
+const Voxel VoxelChunk::getAbsoluteAt(glm::ivec3 &absPosition) const {
     if ( !isWithin(absPosition) ) return Voxel(absPosition, -1.0);
 
     glm::ivec3 relPosition = { absPosition.x - position.x, absPosition.y - position.y, absPosition.z };
@@ -42,7 +42,7 @@ const Voxel VoxelChunk::getAbsoluteAt(glm::ivec3 &absPosition) {
     return getRelativeAt(relPosition);
 }
 
-bool VoxelChunk::isWithin(glm::ivec3 &pos) {
+bool VoxelChunk::isWithin(glm::ivec3 &pos) const {
     bool fitX = pos.x >= position.x && pos.x <= position.x + size.x;
     bool fitY = pos.y >= position.y && pos.y <= position.y + size.y;
     bool fitZ = pos.z >= position.z && pos.z <= position.z + size.z;
@@ -57,7 +57,7 @@ void VoxelChunk::setAbsoluteAt(Voxel voxel) {
     // TODO
 }
 
-const Voxel VoxelChunk::getRelativeTo(const Voxel &voxel, const glm::ivec3 &offset) {
+const Voxel VoxelChunk::getRelativeTo(const Voxel &voxel, const glm::ivec3 &offset) const {
     glm::ivec3 pos = glm::ivec3(voxel.getPosition().x + offset.x, voxel.getPosition().y + offset.y, voxel.getPosition().z + offset.z);
     return getAbsoluteAt(pos);
 }

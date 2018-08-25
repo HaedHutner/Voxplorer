@@ -31,5 +31,5 @@ void Voxel::setValue(double value) {
 }
 
 bool Voxel::isSolid() const {
-    return value >= -0.10;
+    return value >= _SOLID_REQUIREMENT;
 }

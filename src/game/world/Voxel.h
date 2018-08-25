@@ -7,6 +7,8 @@
 
 #include <glm/glm.hpp>
 
+static const double _SOLID_REQUIREMENT = -0.10;
+
 class Voxel {
 
 private:
