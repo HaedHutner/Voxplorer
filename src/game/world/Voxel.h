@@ -28,6 +28,8 @@ public:
 
     void setValue(double value);
 
+    bool isSolid() const;
+
 };
 
 

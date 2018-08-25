@@ -2,29 +2,31 @@
 
 IdleGameState::IdleGameState()
         : GameState("idle-game-state"),
-          program(ShaderProgram::fromFiles("res/shader/simple.vert", "res/shader/simple.frag")) {
+          program(ShaderProgram::fromFiles("res/shader/simple.vert", "res/shader/simple.frag")),
+          mesh(new Mesh()),
+          camera(new Camera()) {
 
-    IdleGameState::camera = std::unique_ptr<Camera>(new Camera());
+    mesh->setVertices({
+                              {0.5, 0.5, 0.5, 1},
+                              {1.0, 2.0, 1.0, 1},
+                              {1.5, 1.5, 3.5, 1},
+                              {4.5, 4.5, 4.5, 1}
+                      });
 
-    IdleGameState::mesh = std::unique_ptr<Mesh>(
-            new Mesh(
-                    {
-                            Vertex({0.5, 0.5, 0.5}),
-                            Vertex({1.0, 2.0, 1.0}),
-                            Vertex({1.5, 1.5, 3.5})
-                    },
-                    {
-                            1, 2, 3
-                    }
-            )
-    );
+    mesh->setIndices({
+                             1, 2, 3,
+                             3, 4, 1
+                     });
 
     program.link();
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
 void IdleGameState::processInputs(GLFWwindow *window) {
+    input.setWindow(window);
     // Process keyboard input
-    camera->processKeyInput(window);
+    camera->processKeyInput(input, glfwGetTime());
 
     printf("Camera Location: %.2f, %.2f, %.2f\n", camera->getPosition().x, camera->getPosition().y,
            camera->getPosition().z);
@@ -32,7 +34,7 @@ void IdleGameState::processInputs(GLFWwindow *window) {
     // Process cursor movement input
     double x, y;
     glfwGetCursorPos(window, &x, &y);
-    camera->processMouseInput(window, x, y);
+    camera->processMouseInput(x, y);
 
     printf("Camera Pitch & Yaw: %.2f, %.2f\n", camera->getPitch(), camera->getYaw());
 }
@@ -47,5 +49,5 @@ void IdleGameState::render(GLFWwindow *window) {
 
     program.use();
 
-    mesh->render(program);
+    mesh->render(Renderable::Mode::Triangles, program);
 }

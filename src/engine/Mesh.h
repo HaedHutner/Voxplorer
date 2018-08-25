@@ -10,30 +10,26 @@
 
 #include "Vertex.hpp"
 #include "ShaderProgram.h"
+#include "Renderable.h"
 
-class Mesh {
+class Mesh : public Renderable {
 
 private:
 
     GLuint verticesSize, indicesSize;
     GLuint vao, vbo, ebo;
 
-    std::vector<Vertex> vertices;
-    std::vector<GLuint> indices;
-
 public:
+
+    Mesh();
 
     Mesh(const std::vector<Vertex> &vertices, const std::vector<GLuint> &indices);
 
-    const std::vector<Vertex> &getVertices() const;
-
     void setVertices(const std::vector<Vertex> &vertices);
-
-    const std::vector<GLuint> &getIndices() const;
 
     void setIndices(const std::vector<GLuint> &indices);
 
-    virtual void render(const ShaderProgram &program);
+    virtual void render(const Mode &mode, const ShaderProgram &program);
 
 };
 

@@ -30,9 +30,11 @@ public:
 
     const std::vector<Voxel> &getVoxels() const;
 
-    const Voxel &getRelativeAt(glm::ivec3 &relPosition);
+    const Voxel getRelativeAt(glm::ivec3 &relPosition);
 
-    const Voxel &getAbsoluteAt(glm::ivec3 &absPosition);
+    const Voxel getAbsoluteAt(glm::ivec3 &absPosition);
+
+    const Voxel getRelativeTo(const Voxel &voxel, const glm::ivec3 &offset);
 
     void setRelativeAt(Voxel voxel);
 

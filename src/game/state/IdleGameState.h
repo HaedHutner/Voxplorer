@@ -15,6 +15,8 @@ class IdleGameState : public GameState{
 
 private:
 
+    KeyStateProvider input;
+
     std::unique_ptr<Camera> camera;
     std::unique_ptr<Mesh> mesh;
 

@@ -37,7 +37,7 @@ add_executable(
         src/game/world/Voxel.h
         src/game/world/VoxelGenerator.cpp
         src/game/world/VoxelGenerator.h
-)
+        src/engine/Renderable.h src/engine/KeyStateProvider.cpp src/engine/KeyStateProvider.h src/game/logic/MarchingCubes.cpp src/game/logic/MarchingCubes.h)
 
 set(PROJECT_LIB ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
@@ -77,5 +77,5 @@ target_link_libraries(${PROJECT_NAME} "fastnoise" ${CMAKE_DL_LIBS})
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SRC_DIR})
 
-file(REMOVE_RECURSE ${CMAKE_CURRENT_BINARY_DIR}/res)
+# file(REMOVE_RECURSE ${CMAKE_CURRENT_BINARY_DIR}/res)
 file(COPY ${PROJECT_SHADER_DIR} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/res)

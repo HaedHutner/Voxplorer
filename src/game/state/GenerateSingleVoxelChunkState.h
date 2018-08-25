@@ -7,19 +7,26 @@
 
 
 #include <memory>
-#include <functional>
 
+#include <engine/Mesh.h>
 #include <engine/GameState.h>
-#include <game/world/VoxelChunk.h>
 #include <engine/Camera.h>
+
+#include <game/world/VoxelChunk.h>
 
 class GenerateSingleVoxelChunkState : public GameState {
 
 private:
 
+    KeyStateProvider input;
+
     std::unique_ptr<Camera> camera;
 
     std::shared_ptr<VoxelChunk> chunk;
+
+    std::unique_ptr<Mesh> mesh;
+
+    ShaderProgram program;
 
 public:
 

@@ -53,41 +53,41 @@ void Camera::move(MoveDirection dir, float speed) {
     }
 }
 
-void Camera::processKeyInput(GLFWwindow *window) {
-    double currentFrame = glfwGetTime();
+void Camera::processKeyInput(const KeyStateProvider &input, double time) {
+    double currentFrame = time;
     delta_time = currentFrame - last_frame;
     last_frame = currentFrame;
 
     double speed = speed_modifyer * delta_time;
 
-    if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) speed *= 10.0f;
+    if (input.isKeyPressed(KEY_LEFT_SHIFT)) speed *= 10.0f;
 
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+    if (input.isKeyPressed(KEY_W)) {
         move(FORWARD, speed);
     }
 
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+    if (input.isKeyPressed(KEY_S)) {
         move(BACK, speed);
     }
 
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+    if (input.isKeyPressed(KEY_A)) {
         move(LEFT, speed);
     }
 
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+    if (input.isKeyPressed(KEY_D)) {
         move(RIGHT, speed);
     }
 
-    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+    if (input.isKeyPressed(KEY_SPACE)) {
         move(UP, speed);
     }
 
-    if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
+    if (input.isKeyPressed(KEY_C)) {
         move(DOWN, speed);
     }
 }
 
-void Camera::processMouseInput(GLFWwindow *window, double x, double y) {
+void Camera::processMouseInput(double x, double y) {
     if (first_mouse) {
         last_x = x;
         last_y = y;

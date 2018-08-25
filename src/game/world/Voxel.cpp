@@ -29,3 +29,7 @@ double Voxel::getValue() const {
 void Voxel::setValue(double value) {
     Voxel::value = value;
 }
+
+bool Voxel::isSolid() const {
+    return value >= -0.10;
+}

@@ -5,7 +5,7 @@
 
 #include <engine/Game.h>
 
-#include <game/state/IdleGameState.h>
+#include <game/state/GenerateSingleVoxelChunkState.h>
 
 class Voxplorer : public Game {
 

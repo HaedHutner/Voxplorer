@@ -1,10 +1,11 @@
-#pragma once
-
-#include <GLFW/glfw3.h>
+#ifndef VOXPLORER_CAMERA_H
+#define VOXPLORER_CAMERA_H
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+#include "KeyStateProvider.h"
 
 class Camera {
 private:
@@ -65,11 +66,13 @@ public:
 
     void move(MoveDirection dir, float speed);
 
-    void processKeyInput(GLFWwindow *window);
+    void processKeyInput(const KeyStateProvider &input, double time);
 
-    void processMouseInput(GLFWwindow *window, double x, double y);
+    void processMouseInput(double x, double y);
 
     double getYaw() const;
 
     double getPitch() const;
 };
+
+#endif

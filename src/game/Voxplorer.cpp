@@ -8,7 +8,7 @@ Voxplorer::Voxplorer() {
 bool Voxplorer::init() {
     bool gameInit = Game::init();
 
-    Voxplorer::state = std::make_shared<IdleGameState>();
+    Voxplorer::state = std::make_shared<GenerateSingleVoxelChunkState>();
 
     return gameInit;
 }
