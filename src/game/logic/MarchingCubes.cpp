@@ -16,10 +16,9 @@ std::unique_ptr<Mesh> MarchingCubes::generateMesh(const VoxelChunk &chunk) {
     std::vector<GLuint> indices = std::vector<GLuint>();
 
     GLuint i = 0;
-    for (auto &voxel : chunk.getVoxels()) {
+    chunk.forEach([&](Voxel voxel) mutable {
 
         GLuint type = 0;
-
         for (int j = 0; j < 8; j++) {
 
             glm::ivec3 offsetCorner = glm::ivec3(
@@ -28,20 +27,40 @@ std::unique_ptr<Mesh> MarchingCubes::generateMesh(const VoxelChunk &chunk) {
                     voxel.getPosition().z + corners[j].z
             );
 
-            if ( !chunk.isWithin(offsetCorner) ) continue;
+            if ( !chunk.isStrictlyWithin(offsetCorner) ) return;
 
             if ( chunk.getAbsoluteAt(offsetCorner).isSolid() ) {
                 type |= corners[j].w;
             }
         }
 
-        if ( type == 0xff || type == 0x0 ) continue;
+        if ( type == 0xff || type == 0x0 ) return;
 
-        vertices.emplace_back(Vertex(voxel.getPosition(), (GLuint) std::round( std::abs(voxel.getValue() * 4) * 255) ));
-        indices.emplace_back(i);
+        int* shape = triTable[type];
 
-        i++;
-    }
+        for ( int k = 0; k < 12; k++ ) {
+            if ( k == -1 ) break;
+
+            glm::vec3 offset = edgeOffset[shape[k]];
+
+            vertices.emplace_back(
+                    Vertex(
+                            {
+                                    voxel.getPosition().x + offset.x,
+                                    voxel.getPosition().y + offset.y,
+                                    voxel.getPosition().z + offset.z
+                            },
+                            (GLuint) std::round( std::abs(voxel.getValue() * 4) * 255)
+                    )
+            );
+            indices.emplace_back(i);
+            i++;
+        }
+
+//        vertices.emplace_back(Vertex(voxel.getPosition(), (GLuint) std::round( std::abs(voxel.getValue() * 4) * 255) ));
+//        indices.emplace_back(i);
+//        i++;
+    });
 
     mesh->setVertices(vertices);
     mesh->setIndices(indices);

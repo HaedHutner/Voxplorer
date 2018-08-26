@@ -7,7 +7,10 @@
 
 
 #include <vector>
+#include <functional>
+
 #include <glm/glm.hpp>
+
 #include "Voxel.h"
 #include "VoxelGenerator.h"
 
@@ -28,7 +31,10 @@ public:
 
     const glm::ivec3 &getSize() const;
 
+    [[deprecated]]
     const std::vector<Voxel> &getVoxels() const;
+
+    const void forEach(std::function<void(Voxel)> func) const;
 
     const Voxel getRelativeAt(glm::ivec3 &relPosition) const;
 
@@ -37,6 +43,8 @@ public:
     const Voxel getRelativeTo(const Voxel &voxel, const glm::ivec3 &offset) const;
 
     bool isWithin(glm::ivec3 &pos) const;
+
+    bool isStrictlyWithin(glm::ivec3 &pos) const;
 
     void setRelativeAt(Voxel voxel);
 

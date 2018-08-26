@@ -61,3 +61,16 @@ const Voxel VoxelChunk::getRelativeTo(const Voxel &voxel, const glm::ivec3 &offs
     glm::ivec3 pos = glm::ivec3(voxel.getPosition().x + offset.x, voxel.getPosition().y + offset.y, voxel.getPosition().z + offset.z);
     return getAbsoluteAt(pos);
 }
+
+bool VoxelChunk::isStrictlyWithin(glm::ivec3 &pos) const {
+    bool fitX = pos.x > position.x && pos.x < position.x + size.x;
+    bool fitY = pos.y > position.y && pos.y < position.y + size.y;
+    bool fitZ = pos.z > position.z && pos.z < position.z + size.z;
+    return fitX && fitY && fitZ;
+}
+
+const void VoxelChunk::forEach(std::function<void(Voxel)> func) const {
+    for(auto &voxel : voxels) {
+        func(voxel);
+    }
+}
