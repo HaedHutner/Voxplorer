@@ -52,13 +52,11 @@ public:
             glm::vec2 beginningRotation = {0, 0}
     );
 
-    ~Camera();
+    const glm::mat4 getView() const;
 
-    glm::mat4 getView();
+    const glm::mat4 &getProjection() const;
 
-    glm::mat4 getProjection();
-
-    glm::vec3 getPosition();
+    const glm::vec3 &getPosition() const;
 
     void updateProjection(int screenX, int screenY);
 

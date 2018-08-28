@@ -7,8 +7,7 @@
 GenerateSingleVoxelChunkState::GenerateSingleVoxelChunkState()
         : GameState("generate-single-voxel-chunk-state"),
           program(ShaderProgram::fromFiles("res/shader/simple.vert", "res/shader/simple.frag")),
-          camera(new Camera()),
-          mesh(new Mesh()) {
+          camera(new Camera()) {
 
     VoxelGenerator generator = VoxelGenerator(1337);
 
@@ -17,12 +16,18 @@ GenerateSingleVoxelChunkState::GenerateSingleVoxelChunkState()
 
     chunk = std::make_shared<VoxelChunk>(generator, position, size);
 
-    mesh = marchingCubes.generateMesh(*chunk);
+    double timeBefore = glfwGetTime();
+
+    renderer = VoxelChunkRenderer(chunk);
+
+    double timeAfter = glfwGetTime();
+
+    printf("Elapsed Time for Marching Cubes: %.3fs", timeAfter - timeBefore);
 
     program.link();
 
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    glEnable(GL_PROGRAM_POINT_SIZE);
+
     glEnable(GL_DEPTH);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
@@ -47,13 +52,5 @@ bool GenerateSingleVoxelChunkState::update() {
 }
 
 void GenerateSingleVoxelChunkState::render(GLFWwindow *window) {
-
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    glm::mat4 mvp = camera->getProjection() * camera->getView() * glm::mat4(1.0);
-    program.setUniformMat4("MVP", mvp);
-
-    program.use();
-
-    mesh->render(Renderable::Mode::Triangles, program);
+    renderer.render(*camera, program);
 }

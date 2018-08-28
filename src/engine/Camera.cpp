@@ -1,27 +1,35 @@
 #include "Camera.h"
 
-Camera::Camera(float fov, float cameraSpeed, float mouseSensitivity, int screenX, int screenY,
-               glm::vec3 beginningCoords, glm::vec3 beginningDirection, glm::vec2 beginningRotation)
-        : camera_position(beginningCoords), camera_direction(beginningDirection), camera_target(beginningRotation, 0),
-          field_of_view(fov), speed_modifyer(cameraSpeed), mouse_sensitivity(mouseSensitivity) {
+Camera::Camera(
+        float fov,
+        float cameraSpeed,
+        float mouseSensitivity,
+        int screenX, int screenY,
+        glm::vec3 beginningCoords,
+        glm::vec3 beginningDirection,
+        glm::vec2 beginningRotation
+) : camera_position(beginningCoords),
+    camera_direction(beginningDirection),
+    camera_target(beginningRotation, 0),
+    field_of_view(fov),
+    speed_modifyer(cameraSpeed),
+    mouse_sensitivity(mouseSensitivity) {
+
     updateProjection(screenX, screenY);
 }
 
-Camera::~Camera() {
-
-}
-
-glm::mat4 Camera::getView() {
+const glm::mat4 Camera::getView() const {
     return glm::lookAt(camera_position, camera_position + camera_front, camera_up);
 }
 
-glm::mat4 Camera::getProjection() {
+const glm::mat4 &Camera::getProjection() const {
     return projection;
 }
 
-glm::vec3 Camera::getPosition() { return camera_position; }
+const glm::vec3 &Camera::getPosition() const { return camera_position; }
 
 void Camera::updateProjection(int screenX, int screenY) {
+
     projection = glm::perspective(glm::radians(field_of_view), (double) screenX / screenY, 0.1, 1000.0);
 }
 

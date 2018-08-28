@@ -4,10 +4,13 @@
 
 #include "VoxelGenerator.h"
 
-VoxelGenerator::VoxelGenerator(int seed)
+VoxelGenerator::VoxelGenerator(int seed, int octaves, float gain, float lacunarity)
     : noiseGen(new FastNoise(seed))
 {
-    noiseGen->SetNoiseType(FastNoise::NoiseType::PerlinFractal);
+    noiseGen->SetNoiseType(FastNoise::NoiseType::CubicFractal);
+    noiseGen->SetFractalOctaves(octaves);
+    noiseGen->SetFractalGain(gain);
+    noiseGen->SetFractalLacunarity(lacunarity);
 }
 
 Voxel VoxelGenerator::getAt(glm::vec3 position) {

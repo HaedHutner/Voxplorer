@@ -17,7 +17,7 @@ private:
 
 public:
 
-    VoxelGenerator(int seed);
+    explicit VoxelGenerator(int seed, int octaves = 3, float gain = 0.5f, float lacunarity = 2.5f);
 
     Voxel getAt(glm::vec3 position);
 

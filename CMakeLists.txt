@@ -8,10 +8,6 @@ project(${PROJECT_NAME})
 set(PROJECT_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(PROJECT_SHADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/res/shader)
 
-# set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fsanitize-undefined-trap-on-error")
-
-# add_compile_options(-fsanitize-undefined-trap-on-error)
-
 add_executable(
         ${PROJECT_NAME}
         src/Main.cpp
@@ -25,19 +21,34 @@ add_executable(
         src/engine/Mesh.cpp
         src/engine/Mesh.h
         src/engine/Vertex.hpp
+        src/engine/Renderer.h
+        src/engine/Renderable.h
+        src/engine/KeyStateProvider.cpp
+        src/engine/KeyStateProvider.h
         src/game/Voxplorer.cpp
         src/game/Voxplorer.h
         src/game/state/IdleGameState.cpp
         src/game/state/IdleGameState.h
         src/game/state/GenerateSingleVoxelChunkState.cpp
         src/game/state/GenerateSingleVoxelChunkState.h
+        src/game/state/MarchingCubesBenchmarkState.cpp
+        src/game/state/MarchingCubesBenchmarkState.h
         src/game/world/VoxelChunk.cpp
         src/game/world/VoxelChunk.h
         src/game/world/Voxel.cpp
         src/game/world/Voxel.h
         src/game/world/VoxelGenerator.cpp
         src/game/world/VoxelGenerator.h
-        src/engine/Renderable.h src/engine/KeyStateProvider.cpp src/engine/KeyStateProvider.h src/game/logic/MarchingCubes.cpp src/game/logic/MarchingCubes.h)
+        src/game/world/VoxelField.h
+        src/game/world/VoxelWorld.cpp
+        src/game/world/VoxelWorld.h
+        src/game/logic/MarchingCubes.cpp
+        src/game/logic/MarchingCubes.h
+        src/game/render/VoxelWorldRenderer.h
+        src/game/render/VoxelWorldRenderer.cpp
+        src/game/render/VoxelChunkRenderer.h
+        src/game/render/VoxelChunkRenderer.cpp
+)
 
 set(PROJECT_LIB ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
@@ -69,7 +80,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${GLM_DIR})
 
 # FastNoise
 set(FAST_NOISE_DIR ${PROJECT_LIB}/FastNoise)
-add_library("fastnoise" ${FAST_NOISE_DIR}/FastNoise.h ${FAST_NOISE_DIR}/FastNoise.cpp)
+add_library("fastnoise" ${FAST_NOISE_DIR}/FastNoise.h ${FAST_NOISE_DIR}/FastNoise.cpp src/game/render/VoxelWorldRenderer.cpp src/game/render/VoxelWorldRenderer.h src/game/render/VoxelChunkRenderer.cpp src/game/render/VoxelChunkRenderer.h)
 
 target_include_directories("fastnoise" PRIVATE ${FAST_NOISE_DIR})
 target_include_directories(${PROJECT_NAME} PRIVATE ${FAST_NOISE_DIR})

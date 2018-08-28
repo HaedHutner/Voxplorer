@@ -7,7 +7,7 @@
 
 #include <glm/glm.hpp>
 
-static const double _SOLID_REQUIREMENT = -0.10;
+static const double VOXEL_SOLID_REQUIREMENT = -0.08;
 
 class Voxel {
 

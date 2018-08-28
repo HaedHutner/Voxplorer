@@ -13,10 +13,12 @@
 
 #include "Voxel.h"
 #include "VoxelGenerator.h"
+#include "VoxelField.h"
 
-class VoxelChunk {
+class VoxelChunk : public VoxelField {
 
-private:
+    // do not change
+    static const int DISTANCE_BETWEEN_VOXELS = 1;
 
     glm::ivec3 position;
     glm::ivec3 size;
@@ -31,24 +33,21 @@ public:
 
     const glm::ivec3 &getSize() const;
 
-    [[deprecated]]
-    const std::vector<Voxel> &getVoxels() const;
+    const void forEach(std::function<void(const Voxel&)> func) const override;
 
-    const void forEach(std::function<void(Voxel)> func) const;
+    const Voxel getRelativeAt(glm::ivec3 &relPosition) const override;
 
-    const Voxel getRelativeAt(glm::ivec3 &relPosition) const;
-
-    const Voxel getAbsoluteAt(glm::ivec3 &absPosition) const;
+    const Voxel getAbsoluteAt(glm::ivec3 &absPosition) const override;
 
     const Voxel getRelativeTo(const Voxel &voxel, const glm::ivec3 &offset) const;
 
-    bool isWithin(glm::ivec3 &pos) const;
+    const int getIndexOf(const glm::ivec3 &relPosition) const;
 
-    bool isStrictlyWithin(glm::ivec3 &pos) const;
+    bool isWithin(glm::ivec3 &pos) const override;
 
-    void setRelativeAt(Voxel voxel);
+    void setRelativeAt(Voxel voxel) override;
 
-    void setAbsoluteAt(Voxel voxel);
+    void setAbsoluteAt(Voxel voxel) override;
 
 };
 

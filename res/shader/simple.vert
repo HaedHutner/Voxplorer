@@ -8,10 +8,10 @@ out vec4 vecColor;
 uniform mat4 MVP;
 
 void main() {
-    if ( material != 0 ) {
+    const uint empty = 0;
+    if ( material != empty ) {
         vecColor = vec4(material / 255.0, material / 255.0, material / 255.0, 1.0);
         gl_Position = MVP * vec4(position, 1.0);
-        gl_PointSize = 5.0;
     } else {
         gl_Position = vec4(0.0, 0.0, 0.0, 0.0);
     }

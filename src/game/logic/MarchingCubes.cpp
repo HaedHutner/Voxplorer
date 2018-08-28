@@ -16,7 +16,7 @@ std::unique_ptr<Mesh> MarchingCubes::generateMesh(const VoxelChunk &chunk) {
     std::vector<GLuint> indices = std::vector<GLuint>();
 
     GLuint i = 0;
-    chunk.forEach([&](Voxel voxel) mutable {
+    chunk.forEach([&](const Voxel &voxel) mutable {
 
         GLuint type = 0;
         for (int j = 0; j < 8; j++) {
@@ -27,19 +27,19 @@ std::unique_ptr<Mesh> MarchingCubes::generateMesh(const VoxelChunk &chunk) {
                     voxel.getPosition().z + corners[j].z
             );
 
-            if ( !chunk.isStrictlyWithin(offsetCorner) ) return;
+            if (!chunk.isWithin(offsetCorner)) return;
 
-            if ( chunk.getAbsoluteAt(offsetCorner).isSolid() ) {
+            if (chunk.getAbsoluteAt(offsetCorner).isSolid()) {
                 type |= corners[j].w;
             }
         }
 
-        if ( type == 0xff || type == 0x0 ) return;
+        if (type == 0xff || type == 0x0) return;
 
-        int* shape = triTable[type];
+        int *shape = triTable[type];
 
-        for ( int k = 0; k < 12; k++ ) {
-            if ( k == -1 ) break;
+        for (int k = 0; k < 12; k++) {
+            if (k == -1) break;
 
             glm::vec3 offset = edgeOffset[shape[k]];
 
@@ -50,16 +50,12 @@ std::unique_ptr<Mesh> MarchingCubes::generateMesh(const VoxelChunk &chunk) {
                                     voxel.getPosition().y + offset.y,
                                     voxel.getPosition().z + offset.z
                             },
-                            (GLuint) std::round( std::abs(voxel.getValue() * 4) * 255)
+                            (GLuint) std::round(std::abs(voxel.getValue() * 4) * 255)
                     )
             );
             indices.emplace_back(i);
             i++;
         }
-
-//        vertices.emplace_back(Vertex(voxel.getPosition(), (GLuint) std::round( std::abs(voxel.getValue() * 4) * 255) ));
-//        indices.emplace_back(i);
-//        i++;
     });
 
     mesh->setVertices(vertices);

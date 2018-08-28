@@ -119,6 +119,6 @@ void ShaderProgram::link() {
     }
 }
 
-void ShaderProgram::use() { glUseProgram(program_id); }
+void ShaderProgram::use() const { glUseProgram(program_id); }
 
-GLuint ShaderProgram::id() { return program_id; }
+GLuint ShaderProgram::id() const { return program_id; }

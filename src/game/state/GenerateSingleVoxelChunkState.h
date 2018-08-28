@@ -15,21 +15,27 @@
 #include <game/world/VoxelChunk.h>
 #include <game/logic/MarchingCubes.h>
 
+#include <game/render/VoxelChunkRenderer.h>
+
 class GenerateSingleVoxelChunkState : public GameState {
 
 private:
 
+    // input
+
     KeyStateProvider input;
 
-    std::unique_ptr<Camera> camera;
+    // game objects
 
     std::shared_ptr<VoxelChunk> chunk;
 
-    std::unique_ptr<Mesh> mesh;
+    // rendering
+
+    VoxelChunkRenderer renderer;
+
+    std::unique_ptr<Camera> camera;
 
     ShaderProgram program;
-
-    MarchingCubes marchingCubes;
 
 public:
 

@@ -50,9 +50,9 @@ public:
 
     void link();
 
-    void use();
+    void use() const;
 
-    GLuint id();
+    GLuint id() const;
 };
 
 #endif
