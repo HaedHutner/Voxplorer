@@ -23,7 +23,7 @@ private:
 
     // input
 
-    KeyStateProvider input;
+    Keyboard input;
 
     // game objects
 
@@ -31,9 +31,9 @@ private:
 
     // rendering
 
-    VoxelChunkRenderer renderer;
+    std::unique_ptr<VoxelChunkRenderer> renderer;
 
-    std::unique_ptr<Camera> camera;
+    std::shared_ptr<Camera> camera;
 
     ShaderProgram program;
 

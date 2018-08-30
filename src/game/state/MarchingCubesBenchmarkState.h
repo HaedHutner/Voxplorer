@@ -21,7 +21,7 @@ private:
 
     bool showMesh = false;
 
-    KeyStateProvider input;
+    Keyboard input;
 
     std::unique_ptr<Camera> camera;
 

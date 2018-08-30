@@ -23,8 +23,8 @@ add_executable(
         src/engine/Vertex.hpp
         src/engine/Renderer.h
         src/engine/Renderable.h
-        src/engine/KeyStateProvider.cpp
-        src/engine/KeyStateProvider.h
+        src/engine/Keyboard.cpp
+        src/engine/Keyboard.h
         src/game/Voxplorer.cpp
         src/game/Voxplorer.h
         src/game/state/IdleGameState.cpp
@@ -48,7 +48,7 @@ add_executable(
         src/game/render/VoxelWorldRenderer.cpp
         src/game/render/VoxelChunkRenderer.h
         src/game/render/VoxelChunkRenderer.cpp
-)
+        src/game/world/VoxelChunkMap.hpp src/game/util/Vec3Map.h)
 
 set(PROJECT_LIB ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
@@ -80,7 +80,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${GLM_DIR})
 
 # FastNoise
 set(FAST_NOISE_DIR ${PROJECT_LIB}/FastNoise)
-add_library("fastnoise" ${FAST_NOISE_DIR}/FastNoise.h ${FAST_NOISE_DIR}/FastNoise.cpp src/game/render/VoxelWorldRenderer.cpp src/game/render/VoxelWorldRenderer.h src/game/render/VoxelChunkRenderer.cpp src/game/render/VoxelChunkRenderer.h)
+add_library("fastnoise" ${FAST_NOISE_DIR}/FastNoise.h ${FAST_NOISE_DIR}/FastNoise.cpp)
 
 target_include_directories("fastnoise" PRIVATE ${FAST_NOISE_DIR})
 target_include_directories(${PROJECT_NAME} PRIVATE ${FAST_NOISE_DIR})

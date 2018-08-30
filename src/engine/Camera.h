@@ -5,7 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "KeyStateProvider.h"
+#include "Keyboard.h"
 
 class Camera {
 private:
@@ -64,7 +64,7 @@ public:
 
     void move(MoveDirection dir, float speed);
 
-    void processKeyInput(const KeyStateProvider &input, double time);
+    void processKeyInput(const Keyboard &input, double time);
 
     void processMouseInput(double x, double y);
 

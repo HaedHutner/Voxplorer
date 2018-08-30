@@ -35,15 +35,15 @@ public:
 
     const void forEach(std::function<void(const Voxel&)> func) const override;
 
-    const Voxel getRelativeAt(glm::ivec3 &relPosition) const override;
+    const Voxel getRelativeAt(const glm::ivec3 &relPosition) const override;
 
-    const Voxel getAbsoluteAt(glm::ivec3 &absPosition) const override;
+    const Voxel getAbsoluteAt(const glm::ivec3 &absPosition) const override;
 
     const Voxel getRelativeTo(const Voxel &voxel, const glm::ivec3 &offset) const;
 
     const int getIndexOf(const glm::ivec3 &relPosition) const;
 
-    bool isWithin(glm::ivec3 &pos) const override;
+    bool isWithin(const glm::ivec3 &pos) const override;
 
     void setRelativeAt(Voxel voxel) override;
 

@@ -16,11 +16,11 @@ public:
 
     virtual const void forEach(std::function<void(const Voxel&)> func) const = 0;
 
-    virtual const Voxel getRelativeAt(glm::ivec3 &relPosition) const = 0;
+    virtual const Voxel getRelativeAt(const glm::ivec3 &relPosition) const = 0;
 
-    virtual const Voxel getAbsoluteAt(glm::ivec3 &absPosition) const = 0;
+    virtual const Voxel getAbsoluteAt(const glm::ivec3 &absPosition) const = 0;
 
-    virtual bool isWithin(glm::ivec3 &pos) const = 0;
+    virtual bool isWithin(const glm::ivec3 &pos) const = 0;
 
     virtual void setRelativeAt(Voxel voxel) = 0;
 

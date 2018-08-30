@@ -26,19 +26,20 @@ const glm::ivec3 &VoxelChunk::getSize() const {
     return size;
 }
 
-const Voxel VoxelChunk::getRelativeAt(glm::ivec3 &relPosition) const {
-    return voxels[getIndexOf(relPosition)];
+const Voxel VoxelChunk::getRelativeAt(const glm::ivec3 &relPosition) const {
+    int index = getIndexOf(relPosition);
+    return voxels[index];
 }
 
-const Voxel VoxelChunk::getAbsoluteAt(glm::ivec3 &absPosition) const {
+const Voxel VoxelChunk::getAbsoluteAt(const glm::ivec3 &absPosition) const {
     if ( !isWithin(absPosition) ) return Voxel(absPosition, -1.0);
 
-    glm::ivec3 relPosition = { absPosition.x - position.x, absPosition.y - position.y, absPosition.z };
+    glm::ivec3 relPosition = { absPosition.x - position.x, absPosition.y - position.y, absPosition.z - position.z };
 
     return getRelativeAt(relPosition);
 }
 
-bool VoxelChunk::isWithin(glm::ivec3 &pos) const {
+bool VoxelChunk::isWithin(const glm::ivec3 &pos) const {
     bool fitX = pos.x >= position.x && pos.x < position.x + size.x;
     bool fitY = pos.y >= position.y && pos.y < position.y + size.y;
     bool fitZ = pos.z >= position.z && pos.z < position.z + size.z;

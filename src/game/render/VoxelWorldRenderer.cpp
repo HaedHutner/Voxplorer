@@ -3,3 +3,11 @@
 //
 
 #include "VoxelWorldRenderer.h"
+
+VoxelWorldRenderer::VoxelWorldRenderer(const std::shared_ptr<VoxelWorld> &world) : world(world) {
+
+}
+
+void VoxelWorldRenderer::render(const Camera &camera, const ShaderProgram &program) {
+
+}

@@ -11,14 +11,14 @@ GenerateSingleVoxelChunkState::GenerateSingleVoxelChunkState()
 
     VoxelGenerator generator = VoxelGenerator(1337);
 
-    glm::ivec3 position = {0, 0, 0};
-    glm::ivec3 size = {64, 64, 64};
+    glm::ivec3 position = {-16, -16, -16};
+    glm::ivec3 size = {32, 32, 32};
 
     chunk = std::make_shared<VoxelChunk>(generator, position, size);
 
     double timeBefore = glfwGetTime();
 
-    renderer = VoxelChunkRenderer(chunk);
+    renderer = std::unique_ptr<VoxelChunkRenderer>(new VoxelChunkRenderer(chunk));
 
     double timeAfter = glfwGetTime();
 
@@ -52,5 +52,5 @@ bool GenerateSingleVoxelChunkState::update() {
 }
 
 void GenerateSingleVoxelChunkState::render(GLFWwindow *window) {
-    renderer.render(*camera, program);
+    renderer->render(*camera, program);
 }

@@ -7,34 +7,46 @@
 
 
 #include <memory>
+#include <unordered_map>
+
 #include "VoxelField.h"
 #include "VoxelChunk.h"
+#include "VoxelChunkMap.hpp"
 
 class VoxelWorld : public VoxelField {
 
     VoxelGenerator generator;
 
-    glm::vec3 origin;
+    glm::ivec3 origin;
 
-    glm::vec3 chunkSize;
+    glm::ivec3 chunkSize;
 
-    std::vector<std::shared_ptr<VoxelChunk>> chunks;
+    std::shared_ptr<VoxelChunkMap> chunks;
 
 public:
 
-    VoxelWorld(const VoxelGenerator &generator, const glm::vec3 &origin, const glm::vec3 &chunkSize);
+    VoxelWorld(const VoxelGenerator &generator, const glm::ivec3 &origin, const glm::ivec3 &chunkSize);
 
+    [[deprecated]]
     const void forEach(std::function<void(const Voxel &)> func) const override;
 
-    const Voxel getRelativeAt(glm::ivec3 &relPosition) const override;
+    const void forEach(std::function<void(const VoxelChunk &)> func) const;
 
-    const Voxel getAbsoluteAt(glm::ivec3 &absPosition) const override;
+    const Voxel getRelativeAt(const glm::ivec3 &relPosition) const override;
 
-    bool isWithin(glm::ivec3 &pos) const override;
+    const Voxel getAbsoluteAt(const glm::ivec3 &absPosition) const override;
+
+    bool isWithin(const glm::ivec3 &pos) const override;
 
     void setRelativeAt(Voxel voxel) override;
 
     void setAbsoluteAt(Voxel voxel) override;
+
+    const std::shared_ptr<VoxelChunkMap> &getChunks() const;
+
+    void generateChunkAt(const glm::ivec3 &chunkPosition);
+
+    glm::ivec3 getChunkPosition(const glm::vec3 &absPosition);
 
 };
 

@@ -133,15 +133,15 @@
 
 typedef int KeyMacro;
 
-class KeyStateProvider {
+class Keyboard {
 
     GLFWwindow* window;
 
 public:
 
-    KeyStateProvider();
+    Keyboard();
 
-    KeyStateProvider(GLFWwindow *window);
+    Keyboard(GLFWwindow *window);
 
     void setWindow(GLFWwindow *window);
 

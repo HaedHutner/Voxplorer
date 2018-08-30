@@ -61,7 +61,7 @@ void Camera::move(MoveDirection dir, float speed) {
     }
 }
 
-void Camera::processKeyInput(const KeyStateProvider &input, double time) {
+void Camera::processKeyInput(const Keyboard &input, double time) {
     double currentFrame = time;
     delta_time = currentFrame - last_frame;
     last_frame = currentFrame;
